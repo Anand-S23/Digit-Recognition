@@ -8,4 +8,5 @@ from keras.models import Sequential
 from tensorflow.keras.utils import to_categorical
 
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
+print(X_train)
 print(X_train.shape, y_train.shape, X_test.shape, y_test.shape)
