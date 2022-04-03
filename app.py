@@ -20,8 +20,8 @@ def main(screen, clock):
         clock.tick(FPS)
 
         # Get inputs
-        for event in pygame.event.get() :
-            if event.type == QUIT :
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 running = False
 
         # Update application
