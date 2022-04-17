@@ -6,6 +6,7 @@
 
 import numpy as np 
 import pandas as pd 
+import tensorflow as tf
 from tensorflow import keras
 from keras import Sequential
 from keras.layers import Dense, Conv2D, Flatten, BatchNormalization, Activation
@@ -140,6 +141,11 @@ model.add(Dense(units=10))
 model.add(BatchNormalization())
 model.add(Activation('softmax'))
 
+model2 = tf.keras.models.Sequential()
+model2.add(tf.keras.layers.Flatten())
+model2.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
+model2.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
+model2.add(tf.keras.layers.Dense(10, activation=tf.nn.softmax))
 
 # In[13]:
 
@@ -147,6 +153,10 @@ model.add(Activation('softmax'))
 sgd = SGD(learning_rate=0.05)
 
 model.compile(loss="categorical_crossentropy", optimizer=sgd, metrics=["accuracy"])
+
+model2.compile(optimizer='adam', 
+        loss='categorical_crossentropy', 
+        metrics=['accuracy']) 
 
 
 # In[14]:
@@ -180,6 +190,7 @@ val_generator = val_datagen.flow(x_val, y_val,
 
 trained_model = model.fit(train_generator,validation_data=(val_generator), epochs=1, batch_size=50)
 
+trained_model2 = model2.fit(x_train, y_train, epochs=5)
 
 # In[16]:
 
@@ -195,6 +206,7 @@ print(predictions_final)
 
 # In[ ]:
 
-
+model.save("dig_rec_classifer.h5")
+model2.save("dig_rec_classifer.h5")
 
 
